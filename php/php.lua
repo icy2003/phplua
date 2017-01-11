@@ -32,6 +32,5 @@ function php:defaultValue(var, defaultValue)
 end
 
 -- test:
--- var:var_dump(array:array_sum( {'1a','b','c',2,3,1.2}))
-php.var:var_dump(php.array:array_change_key_case({a=1,b=2,c=4},1))
+-- php.var:var_dump(php.array:count({'a',['aa']=3,1,1,1,2,3,4}))
 return php

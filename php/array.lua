@@ -25,7 +25,7 @@ local array = {
 -- @todo 23参数待实现
 function array:array_keys(array, search_value, strict)
     local result = {}
-    for k, v in pairs(array) do
+    for k, _ in pairs(array) do
         table.insert(result, k)
     end
     return result
@@ -111,6 +111,23 @@ function array:array_combine(keys, values)
     return result
 end
 
+--- 统计数组中所有的值出现的次数
+-- @function array_count_values
+-- @param input 统计这个数组的值
+-- @return array 返回一个关联数组，用 input 数组中的值作为键名，该值在数组中出现的次数作为值
+-- @todo 对数组里面的每个不是 string 和 integer 类型的元素抛出一个警告错误（E_WARNING）
+function array:array_count_values(input)
+    local result = {}
+    for _, v in ipairs(input) do
+        if result[v] then
+            result[v] = result[v] + 1
+        else
+            result[v] = 1
+        end
+    end
+    return result
+end
+
 --- 检查给定的键名或索引是否存在于数组中
 -- @function array_key_exists
 -- @param key 要检查的键
@@ -118,7 +135,7 @@ end
 -- @return array 成功时返回true， 或者在失败时返回false
 function array:array_key_exists(key, search)
     local exist = false
-    for k, v in pairs(search) do
+    for k, _ in pairs(search) do
         if k == key then
             exist = true
             break
@@ -133,7 +150,7 @@ end
 -- @return array 所有值的和以整数或浮点数的结果返回，除了数字格式的字符串和数字，其他被认作0
 function array:array_sum(array)
     local result = 0
-    for k, v in pairs(array) do
+    for _, v in pairs(array) do
         result = result + php:defaultValue(tonumber(v), 0)
     end
     return result
@@ -147,7 +164,7 @@ end
 -- @todo 第二个参数暂未实现
 function array:count(var, mode)
     local count = 0
-    for k, v in pairs(t) do
+    for _, _ in pairs(t) do
         count = count + 1
     end
     return count
