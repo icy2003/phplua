@@ -128,6 +128,21 @@ function array:array_count_values(input)
     return result
 end
 
+--- 带索引检查计算数组的差集
+-- @function array_diff_assoc
+-- @param array1 The array to compare from
+-- @param array2 An array to compare against
+-- @return array2 Returns an array containing all the values from array1 that are not present in any of the other arrays
+-- @todo 支持更多的参数
+function array:array_diff_assoc(array1, array2)
+    local result = {}
+    for key, value in pairs(array1) do
+        if not (array2[key] and array1[key] == array2[key]) then result[key] = value end
+
+    end
+    return result
+end
+
 --- 检查给定的键名或索引是否存在于数组中
 -- @function array_key_exists
 -- @param key 要检查的键

@@ -19,8 +19,10 @@
 -- @field array array模块
 php   = php or {
     var = require('var'),
-    array = require('array')
+    array = require('array'),
+    string = require('string'),
 }
+
 --- 为变量设置默认值
 -- @function defaultValue
 -- @param var 变量
@@ -31,6 +33,13 @@ function php:defaultValue(var, defaultValue)
     return var
 end
 
+function php:getArg()
+    local _, version = php.string:explode(' ', 'lua 5.1')
+    print(version)
+end
+
 -- test:
--- php.var:var_dump(php.array:count({'a',['aa']=3,1,1,1,2,3,4}))
+php.var:var_dump(php.array:array_diff_assoc({1,2,3,4},{1,3,2,4}))
+print(_VERSION)
+php:getArg()
 return php
